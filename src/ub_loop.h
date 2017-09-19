@@ -35,7 +35,6 @@
 #ifndef UB_LOOP_H
 #define UB_LOOP_H 
 
-#include "config.h"
 #ifdef HAVE_UNBOUND_EVENT_API
 #include "getdns/getdns.h"
 #include "getdns/getdns_extra.h"

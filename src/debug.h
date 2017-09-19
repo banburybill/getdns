@@ -35,7 +35,6 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include "config.h"
 #define STUB_DEBUG_ENTRY     "=> ENTRY:       "
 #define STUB_DEBUG_SETUP     "--- SETUP:      "
 #define STUB_DEBUG_SETUP_TLS "--- SETUP(TLS): "

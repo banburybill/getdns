@@ -31,7 +31,6 @@
  */
 #ifndef SELECT_EVENTLOOP_H_
 #define SELECT_EVENTLOOP_H_
-#include "config.h"
 #include "getdns/getdns.h"
 #include "getdns/getdns_extra.h"
 

@@ -32,7 +32,6 @@
 #ifndef RR_DICT_H_
 #define RR_DICT_H_
 
-#include "config.h"
 #include "getdns/getdns.h"
 #include "gldns/gbuffer.h"
 

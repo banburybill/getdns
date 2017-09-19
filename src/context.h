@@ -39,7 +39,6 @@
 
 #include "getdns/getdns.h"
 #include "getdns/getdns_extra.h"
-#include "config.h"
 #include "types-internal.h"
 #include "extension/default_eventloop.h"
 #include "util/rbtree.h"

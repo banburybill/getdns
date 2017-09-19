@@ -38,7 +38,6 @@
 #ifndef UTIL_INTERNAL_H
 #define UTIL_INTERNAL_H
 
-#include "config.h"
 #include "context.h"
 #include "rr-iter.h"
 #include <ctype.h>

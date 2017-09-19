@@ -36,6 +36,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include "config.h"
 #include "types-internal.h"
 #include "util-internal.h"
 #include "list.h"

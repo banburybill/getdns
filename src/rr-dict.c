@@ -34,6 +34,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "config.h"
+
 #include "rr-dict.h"
 #include "gldns/gbuffer.h"
 #include "util-internal.h"

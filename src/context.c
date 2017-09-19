@@ -68,7 +68,6 @@ typedef unsigned short in_port_t;
 #endif
 #include <stdbool.h>
 
-#include "config.h"
 #ifdef HAVE_LIBUNBOUND
 #include <unbound.h>
 #endif

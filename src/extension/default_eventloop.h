@@ -31,7 +31,6 @@
  */
 #ifndef DEFAULT_EVENTLOOP_H_
 #define DEFAULT_EVENTLOOP_H_
-#include "config.h"
 #ifdef USE_POLL_DEFAULT_EVENTLOOP
 #include "extension/poll_eventloop.h"
 #define _getdns_default_eventloop	_getdns_poll_eventloop

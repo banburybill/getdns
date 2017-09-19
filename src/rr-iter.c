@@ -29,8 +29,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "rr-iter.h"
 #include "config.h"
+
+#include "rr-iter.h"
 #include <ctype.h>
 #include "gldns/rrdef.h"
 

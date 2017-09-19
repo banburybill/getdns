@@ -39,7 +39,6 @@
 #define DNSSEC_H_
 
 #include "getdns/getdns.h"
-#include "config.h"
 #include "gldns/gbuffer.h"
 #include "gldns/rrdef.h"
 #include "types-internal.h"
