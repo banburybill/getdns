@@ -31,7 +31,6 @@
  */
 #ifndef POLL_EVENTLOOP_H_
 #define POLL_EVENTLOOP_H_
-#include "config.h"
 #include "getdns/getdns.h"
 #include "getdns/getdns_extra.h"
 #include "types-internal.h"

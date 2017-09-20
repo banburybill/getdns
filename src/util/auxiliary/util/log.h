@@ -34,7 +34,6 @@
 #ifndef UTIL_LOG_H
 #define UTIL_LOG_H
 
-#include "config.h"
 #include "debug.h"
 
 #ifdef DEBUGGING

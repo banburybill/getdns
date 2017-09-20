@@ -25,7 +25,6 @@
 #include "getdns/getdns.h"
 #include "types-internal.h"
 #include "util/lruhash.h"
-#include "config.h"
 
 #ifndef USE_WINSOCK
 #define SOCKADDR_STORAGE struct sockaddr_storage

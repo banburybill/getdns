@@ -37,7 +37,6 @@
 #ifndef _check_getdns_eventloop_h_
 #define _check_getdns_eventloop_h_
 
-#include "config.h"
 #include "getdns/getdns.h"
 
 void run_event_loop_impl(struct getdns_context* context, void* eventloop);

@@ -33,8 +33,6 @@
 #ifndef LOCKS_H_SYMBOLS
 #define LOCKS_H_SYMBOLS
 
-#include "config.h"
-
 #define ub_thread_blocksigs	_getdns_ub_thread_blocksigs
 #define ub_thread_sig_unblock	_getdns_ub_thread_sig_unblock
 
