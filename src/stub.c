@@ -66,18 +66,6 @@
 #include "general.h"
 #include "pubkey-pinning.h"
 
-#ifdef USE_WINSOCK
-typedef u_short sa_family_t;
-#define _getdns_EWOULDBLOCK (WSAGetLastError() == WSATRY_AGAIN ||\
-                             WSAGetLastError() == WSAEWOULDBLOCK)
-#define _getdns_EINPROGRESS (WSAGetLastError() == WSAEINPROGRESS)
-#define _getdns_EMFILE      (WSAGetLastError() == WSAEMFILE)
-#else
-#define _getdns_EWOULDBLOCK (errno == EAGAIN || errno == EWOULDBLOCK)
-#define _getdns_EINPROGRESS (errno == EINPROGRESS)
-#define _getdns_EMFILE      (errno == EMFILE)
-#endif
-
 /* WSA TODO: 
  * STUB_TCP_WOULDBLOCK added to deal with edge triggered event loops (versus
  * level triggered).  See also lines containing WSA TODO below...
@@ -852,7 +840,7 @@ stub_tcp_write(int fd, getdns_tcp_state *tcp, getdns_network_req *netreq)
 		/* Coming back from an earlier unfinished write or handshake.
 		 * Try to send remaining data */
 #ifdef USE_WINSOCK
-		written = send(fd, tcp->write_buf + tcp->written,
+		written = send(fd, (void *)(tcp->write_buf + tcp->written),
 			tcp->write_buf_len - tcp->written, 0);
 #else
 		written = write(fd, tcp->write_buf     + tcp->written,
