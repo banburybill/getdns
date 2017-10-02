@@ -2550,15 +2550,15 @@ getdns_context_set_dns_root_servers(
 		if (addr_bd->size == 16 &&
 		    inet_ntop(AF_INET6, addr_bd->data, dst, sizeof(dst)))
 
-			fprintf(fh,". NS "PRIsz".root-servers.getdnsapi.net.\n"
-			    PRIsz".root-servers.getdnsapi.net. AAAA %s\n",
+			fprintf(fh,". NS %"PRIsz".root-servers.getdnsapi.net.\n"
+			    "%"PRIsz".root-servers.getdnsapi.net. AAAA %s\n",
 			    i, i, dst);
 
 		else if (addr_bd->size == 4 &&
 		    inet_ntop(AF_INET, addr_bd->data, dst, sizeof(dst)))
 
-			fprintf(fh,". NS "PRIsz".root-servers.getdnsapi.net.\n"
-			    PRIsz".root-servers.getdnsapi.net. A %s\n",
+			fprintf(fh,". NS %"PRIsz".root-servers.getdnsapi.net.\n"
+			    "%"PRIsz".root-servers.getdnsapi.net. A %s\n",
 			    i, i, dst);
 	}
 	fclose(fh);
@@ -3521,16 +3521,13 @@ _getdns_ns_dns_setup(struct getdns_context *context)
 }
 
 getdns_return_t
-_getdns_context_prepare_for_resolution(struct getdns_context *context,
-    int usenamespaces)
+_getdns_context_prepare_for_resolution(getdns_context *context)
 {
-	size_t i;
 	getdns_return_t r;
 
 	RETURN_IF_NULL(context, GETDNS_RETURN_INVALID_PARAMETER);
-    if (context->destroying) {
-        return GETDNS_RETURN_BAD_CONTEXT;
-    }
+	if (context->destroying)
+		return GETDNS_RETURN_BAD_CONTEXT;
 
 	/* Transport can in theory be set per query in stub mode */
 	if (context->resolution_type == GETDNS_RESOLUTION_STUB && 
@@ -3607,28 +3604,9 @@ _getdns_context_prepare_for_resolution(struct getdns_context *context,
 	 */
 
 
-	if (! usenamespaces) {
-		r = _getdns_ns_dns_setup(context);
-		if (r == GETDNS_RETURN_GOOD)
-			context->resolution_type_set = context->resolution_type;
-		return r;
-	}
-
-	r = GETDNS_RETURN_GOOD;
-	for (i = 0; i < context->namespace_count; i++) {
-		switch (context->namespaces[i]) {
-		case GETDNS_NAMESPACE_DNS:
-			r = _getdns_ns_dns_setup(context);
-			break;
-
-		default:
-			r = GETDNS_RETURN_BAD_CONTEXT;
-			break;
-		}
-		if (r != GETDNS_RETURN_GOOD)
-			return r; /* try again later (resolution_type_set) */
-	}
-	context->resolution_type_set = context->resolution_type;
+	r = _getdns_ns_dns_setup(context);
+	if (r == GETDNS_RETURN_GOOD)
+		context->resolution_type_set = context->resolution_type;
 	return r;
 } /* _getdns_context_prepare_for_resolution */
 
@@ -3777,7 +3755,7 @@ _get_context_settings(getdns_context* context)
 	getdns_list *list;
 	size_t       i;
 	const char  *str_value;
-	char         appdata_dir[PATH_MAX] = "";
+	char         appdata_dir[_GETDNS_PATH_MAX] = "";
 
 	if (!result)
 		return NULL;
@@ -4691,7 +4669,7 @@ static size_t _getdns_get_appdata(getdns_context *context, char *path)
 		DEBUG_ANCHOR("ERROR %s(): Could not get %%AppData%% directory\n"
 		            , __FUNC__);
 
-	else if ((len = strlen(path)) + sizeof(APPDATA_SUBDIR) + 2 >= PATH_MAX)
+	else if ((len = strlen(path)) + sizeof(APPDATA_SUBDIR) + 2 >= _GETDNS_PATH_MAX)
 		DEBUG_ANCHOR("ERROR %s(): Home path too long for appdata\n"
 		            , __FUNC__);
 #else
@@ -4708,7 +4686,7 @@ static size_t _getdns_get_appdata(getdns_context *context, char *path)
 		DEBUG_ANCHOR("ERROR %s(): Could not get home directory\n"
 		            , __FUNC__);
 
-	else if ((len = strlen(home)) + sizeof(APPDATA_SUBDIR) + 2 >= PATH_MAX)
+	else if ((len = strlen(home)) + sizeof(APPDATA_SUBDIR) + 2 >= _GETDNS_PATH_MAX)
 		DEBUG_ANCHOR("ERROR %s(): Home path too long for appdata\n"
 		            , __FUNC__);
 
@@ -4748,7 +4726,7 @@ static size_t _getdns_get_appdata(getdns_context *context, char *path)
 
 FILE *_getdns_context_get_priv_fp(getdns_context *context, const char *fn)
 {
-	char path[PATH_MAX];
+	char path[_GETDNS_PATH_MAX];
 	FILE *f = NULL;
 	size_t len;
 
@@ -4814,7 +4792,7 @@ uint8_t *_getdns_context_get_priv_file(getdns_context *context,
 int _getdns_context_write_priv_file(getdns_context *context,
     const char *fn, getdns_bindata *content)
 {
-	char path[PATH_MAX], tmpfn[PATH_MAX];
+	char path[_GETDNS_PATH_MAX], tmpfn[_GETDNS_PATH_MAX];
 	int fd = -1;
 	FILE *f = NULL;
 	size_t len;
@@ -4870,7 +4848,7 @@ int _getdns_context_write_priv_file(getdns_context *context,
 
 int _getdns_context_can_write_appdata(getdns_context *context)
 {
-	char test_fn[30], path[PATH_MAX];
+	char test_fn[30], path[_GETDNS_PATH_MAX];
 	size_t len;
 	getdns_bindata test_content = { 4, (void *)"TEST" };
 
