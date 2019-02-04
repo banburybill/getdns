@@ -238,7 +238,7 @@ install-stubby: stubby stubby.1 install-stubby-files-@HOSTOS@
 	$(INSTALL) -m 755 -d $(DESTDIR)$(runstatedir)
 	$(INSTALL) -m 755 -d $(DESTDIR)$(mandir)
 	$(INSTALL) -m 755 -d $(DESTDIR)$(mandir)/man1
-	$(INSTALL) -m 644 stubby\.1 $(DESTDIR)$(mandir)/man1
+	$(INSTALL) -m 644 stubby.1 $(DESTDIR)$(mandir)/man1
 
 uninstall-stubby:
 	$(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)$(bindir)/stubby

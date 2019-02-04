@@ -193,7 +193,7 @@ add_WIN_cacerts_to_openssl_store(getdns_context *ctxt, SSL_CTX* tls_ctx)
 	PCCERT_CONTEXT  pTargetCert = NULL;
 	
 	_getdns_log(&ctxt->log, GETDNS_LOG_SYS_STUB, GETDNS_LOG_DEBUG
-	    , "%s: %s\n", STUB_DEBUG_SETUP_TLS,
+	    , "%s: %s\n", STUB_DEBUG_SETUP_TLS
 	    , "Adding Windows certificates from system root store to CA store")
 	    ;
 
@@ -243,7 +243,7 @@ add_WIN_cacerts_to_openssl_store(getdns_context *ctxt, SSL_CTX* tls_ctx)
 		if (!cert1) {
 			/* return error if a cert fails */
 			_getdns_log(&ctxt->log
-			    , GETDNS_LOG_SYS_STUB, GETDNS_LOG_ERR,
+			    , GETDNS_LOG_SYS_STUB, GETDNS_LOG_ERR
 			    , "%s: %s %d:%s\n"
 			    , STUB_DEBUG_SETUP_TLS
 			    , "Unable to parse certificate in memory"
